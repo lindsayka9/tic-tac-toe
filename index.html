@@ -12,14 +12,79 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body class="container-fluid">
-      <h1>Example</h1>
+      <nav class="nav-bar">
+        <div class="nav-div">
+          <a class="nav-item">Item1</a>
+          <a class="nav-item">Item2</a>
+          <a class="nav-item">Item3</a>
+          <div class="nav-sign-buttons">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sign-up">
+              Sign Up
+            </button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sign-in">
+              Sign In
+            </button>
+          </div>
+        </div>
+      </nav>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
+      <h1>TIC TAC TOE</h1>
+
+
+      <p>Text Here</p>
+
+      <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">Sign Up!</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class ="sign-up-modal" id="sign-up-form">
+                <fieldset>
+                  <input class="sign-up-input" type="text" name="credentials[email]" placeholder="Enter Email">
+                  <input class="sign-up-input" type="password" name="credentials[password]" placeholder="Enter Password">
+                  <input class="sign-up-input" type="password" name="credentials[password-confirmation]" placeholder="Confirm Password">
+                  <input class="button" type="submit" name="submit" value="Sign-Up!">
+                </fieldset>
+                <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
+              </form>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="sign-in" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h3 class="modal-title" id="exampleModalLabel">Sign In!</h3>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class ="sign-in-modal" id="sign-in-form">
+                <fieldset>
+                  <input type="text" name="credentials[email]" placeholder="Enter Email">
+                  <input type="password" name="credentials[password]" placeholder="Enter Password">
+                  <input class="button" type="submit" name="submit" value="Sign-In!">
+                </fieldset>
+                <!-- <button type="submit" class="btn btn-primary">Sign In</button> -->
+              </form>
+            </div>
+            <div class="modal-footer">
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
     </body>
 </html>
