@@ -3,22 +3,19 @@
 const store = require('./store')
 
 const signUpSuccess = function (data) {
-  console.log(data)
+  $('#message').text('Successfully Signed Up!').css('color', 'green')
 }
 
-const signUpFailure = function (error) {
-  console.error(error)
+const signUpFailure = function (data) {
+  $('#message').text('Error signing up').css('color', 'red')
 }
 
 const signInSuccess = function (data) {
-  console.log(data)
   $('#message').text('Successfully Signed In!').css('color', 'green')
   store.user = data.user // save to what?
-  console.log('store: ', store)
 }
 
-const signInFailure = function (error) {
-  console.error(error)
+const signInFailure = function (data) {
   $('#message').text('Incorrect Email and/or Password').css('color', 'red')
 }
 
@@ -26,19 +23,16 @@ const changePasswordSuccess = function (data) {
   $('#message').text('Successfully changed password!').css('color', 'green')
 }
 
-const changePasswordFailure = function (error) {
-  console.error(error)
+const changePasswordFailure = function (data) {
   $('#message').text('Error changing password').css('color', 'red')
 }
 
 const signOutSuccess = function (data) {
   $('#message').text('Successfully signed out!').css('color', 'green')
   store.user = null
-  console.log(store)
 }
 
-const signOutFailure = function (error) {
-  console.error(error)
+const signOutFailure = function (data) {
   $('#message').text('Error signing out').css('color', 'red')
 }
 
