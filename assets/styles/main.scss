@@ -1,0 +1,46 @@
+$header-color: #4569e4;
+$body-color: #8ca6ff;
+$nav-footer-color: #acb6d9;
+$border: 2px solid #fff;
+$title-color: #fff;
+
+header {
+  background-color: $header-color;
+}
+
+h1 {
+  color: $title-color;
+  font-family: Arial, serif;
+  font-size: 70px;
+}
+
+body {
+  background-color: $body-color;
+}
+
+footer {
+  background-color: $nav-footer-color;
+  border: border;
+}
+
+nav {
+  background-color: $nav-footer-color;
+  border: $border;
+  float: right;
+  width: 100%;
+
+  & button {
+    align-items: right;
+  }
+}
+
+.box {
+  border: $border;
+  height: 150px;
+}
+
+.container-game {
+  align-content: center;
+  width: 75%;
+
+}
