@@ -36,11 +36,24 @@ const onSignOut = function (event) {
     .catch(ui.signOutFailure)
 }
 
+const onClick = function () {
+  console.log('hello?')
+}
+
 const addHandlers = function () {
   $('#sign-up-form').on('submit', onSignUp)
   $('#sign-in-form').on('submit', onSignIn)
   $('#change-password-form').on('submit', onChangePassword)
   $('#sign-out').on('submit', onSignOut)
+  $('#0').on('click', onClick)
+  $('#1').on('click', onClick)
+  $('#2').on('click', onClick)
+  $('#3').on('click', onClick)
+  $('#4').on('click', onClick)
+  $('#5').on('click', onClick)
+  $('#6').on('click', onClick)
+  $('#7').on('click', onClick)
+  $('#8').on('click', onClick)
 }
 
 module.exports = {
