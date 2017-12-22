@@ -2,6 +2,33 @@
 
 const store = require('./store')
 
+const gameArray = ['', '', '', '', '', '', '', '', '']
+//
+// const isX = function (i) {
+//   if (i % 2) {
+//     return false
+//   } else {
+//     return true
+//   }
+// }
+// //
+// const updateBox = function (boxIndex) {
+//   let turn = 0
+//   for (let i = 0; i < gameArray.length - 1; i++) {
+//     if (gameArray[i] === 'X' || gameArray[i] === 'O') {
+//       turn++
+//     }
+//   }
+//   if (gameArray[boxIndex] === 'X' || gameArray[boxIndex] === 'O') {
+//     console.log('choose another space')
+//   } else if (isX(turn) === true) {
+//     gameArray[boxIndex] = 'X'
+//   } else if (isX(turn) === false) {
+//     gameArray[boxIndex] = 'O'
+//   }
+//   console.log(turn)
+// }
+
 const signUpSuccess = function (data) {
   $('#message').text('Successfully Signed Up!').css('color', 'green')
 }
@@ -44,5 +71,7 @@ module.exports = {
   changePasswordSuccess,
   changePasswordFailure,
   signOutFailure,
-  signOutSuccess
+  signOutSuccess,
+  gameArray
+  // updateBox
 }
