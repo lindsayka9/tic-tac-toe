@@ -4,27 +4,28 @@ const api = require('./api')
 // const store = require('./store)')
 // Using your knowledge of jQuery write a function, onSubmitForm, that console
 // logs the input in the input field when "save changes" is clicked
-// let turn = 0
-// const playerOne = 'X'
-// const playerTwo = 'O'
-// const emptyCell = ' '
+let turn = 0
+const playerOne = 'X'
+const playerTwo = 'O'
+const emptyCell = ''
 
-// const makeMove = function (event) {
-//   event.preventDefault()
-//   if ($(this).text() !== emptyCell) {
-//     console.log('make a move')
-//   } else if (turn % 2 !== 0) {
-//     $(this).text(playerOne)
-//   } else {
-//     $(this).text(playerTwo)
-//   }
-//   turn++
-// }
-
-const onBoxClick = function (event) {
-  const boxId = '#' + this.id
-  $(boxId).text('X')
+const makeMove = function (event) {
+  event.preventDefault()
+  if ($(this).text() !== emptyCell) {
+    console.log('make a move')
+  } else if (turn % 2 !== 0) {
+    $(this).text(playerOne)
+  } else {
+    $(this).text(playerTwo)
+  }
+  turn++
 }
+//
+// const onBoxClick = function (event) {
+//   const boxData = event.target.dataset
+//   const boxIndex = boxData.cellIndex
+//   ui.updateBox(boxIndex)
+// }
 
 const onSignUp = function (event) {
   const data = getFormFields(event.target)
@@ -69,6 +70,9 @@ const onNewGame = function (event) {
   $('#6').text('')
   $('#7').text('')
   $('#8').text('')
+  api.newGame()
+    .then(ui.newGameSuccess)
+    .catch(ui.newGameFailure)
 }
 
 const addHandlers = function () {
@@ -76,15 +80,24 @@ const addHandlers = function () {
   $('#sign-in-form').on('submit', onSignIn)
   $('#change-password-form').on('submit', onChangePassword)
   $('#sign-out').on('submit', onSignOut)
-  $('#0').on('click', onBoxClick)
-  $('#1').on('click', onBoxClick)
-  $('#2').on('click', onBoxClick)
-  $('#3').on('click', onBoxClick)
-  $('#4').on('click', onBoxClick)
-  $('#5').on('click', onBoxClick)
-  $('#6').on('click', onBoxClick)
-  $('#7').on('click', onBoxClick)
-  $('#8').on('click', onBoxClick)
+  $('#0').on('click', makeMove)
+  $('#1').on('click', makeMove)
+  $('#2').on('click', makeMove)
+  $('#3').on('click', makeMove)
+  $('#4').on('click', makeMove)
+  $('#5').on('click', makeMove)
+  $('#6').on('click', makeMove)
+  $('#7').on('click', makeMove)
+  $('#8').on('click', makeMove)
+  // $('#0').on('click', onBoxClick)
+  // $('#1').on('click', onBoxClick)
+  // $('#2').on('click', onBoxClick)
+  // $('#3').on('click', onBoxClick)
+  // $('#4').on('click', onBoxClick)
+  // $('#5').on('click', onBoxClick)
+  // $('#6').on('click', onBoxClick)
+  // $('#7').on('click', onBoxClick)
+  // $('#8').on('click', onBoxClick)
   $('#new-game-button').on('click', onNewGame)
   $('')
 }
