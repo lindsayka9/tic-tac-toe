@@ -4,6 +4,27 @@ const api = require('./api')
 // const store = require('./store)')
 // Using your knowledge of jQuery write a function, onSubmitForm, that console
 // logs the input in the input field when "save changes" is clicked
+// let turn = 0
+// const playerOne = 'X'
+// const playerTwo = 'O'
+// const emptyCell = ' '
+
+// const makeMove = function (event) {
+//   event.preventDefault()
+//   if ($(this).text() !== emptyCell) {
+//     console.log('make a move')
+//   } else if (turn % 2 !== 0) {
+//     $(this).text(playerOne)
+//   } else {
+//     $(this).text(playerTwo)
+//   }
+//   turn++
+// }
+
+const onBoxClick = function (event) {
+  const boxId = '#' + this.id
+  $(boxId).text('X')
+}
 
 const onSignUp = function (event) {
   const data = getFormFields(event.target)
@@ -50,75 +71,22 @@ const onNewGame = function (event) {
   $('#8').text('')
 }
 
-const onClick0 = function () {
-  event.preventDefault()
-  console.log(this.id)
-  $('#0').text('something')
-}
-
-const onClick1 = function () {
-  event.preventDefault()
-  console.log(this.id)
-  $('#1').text('wut')
-}
-
-const onClick2 = function () {
-  event.preventDefault()
-  console.log(this.id)
-  $('#2').text('how')
-}
-
-const onClick3 = function () {
-  event.preventDefault()
-  console.log(this.id)
-  $('#3').text('how')
-}
-
-const onClick4 = function () {
-  event.preventDefault()
-  console.log(this.id)
-  $('#4').text('why')
-}
-
-const onClick5 = function () {
-  event.preventDefault()
-  console.log(this.id)
-  $('#5').text('how')
-}
-
-const onClick6 = function () {
-  event.preventDefault()
-  console.log(this.id)
-  $('#6').text('get')
-}
-
-const onClick7 = function () {
-  event.preventDefault()
-  console.log(this.id)
-  $('#7').text('it')
-}
-
-const onClick8 = function () {
-  event.preventDefault()
-  console.log(this.id)
-  $('#8').text('done')
-}
-
 const addHandlers = function () {
   $('#sign-up-form').on('submit', onSignUp)
   $('#sign-in-form').on('submit', onSignIn)
   $('#change-password-form').on('submit', onChangePassword)
   $('#sign-out').on('submit', onSignOut)
-  $('#0').on('click', onClick0)
-  $('#1').on('click', onClick1)
-  $('#2').on('click', onClick2)
-  $('#3').on('click', onClick3)
-  $('#4').on('click', onClick4)
-  $('#5').on('click', onClick5)
-  $('#6').on('click', onClick6)
-  $('#7').on('click', onClick7)
-  $('#8').on('click', onClick8)
+  $('#0').on('click', onBoxClick)
+  $('#1').on('click', onBoxClick)
+  $('#2').on('click', onBoxClick)
+  $('#3').on('click', onBoxClick)
+  $('#4').on('click', onBoxClick)
+  $('#5').on('click', onBoxClick)
+  $('#6').on('click', onBoxClick)
+  $('#7').on('click', onBoxClick)
+  $('#8').on('click', onBoxClick)
   $('#new-game-button').on('click', onNewGame)
+  $('')
 }
 
 module.exports = {
