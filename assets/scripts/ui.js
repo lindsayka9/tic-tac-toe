@@ -28,23 +28,23 @@ const gameArray = ['', '', '', '', '', '', '', '', '']
 //   }
 //   console.log(turn)
 // }
+//
+// const signUpSuccess = function (data) {
+//   $('#message').text('Successfully Signed Up!').css('color', 'green')
+// }
+//
+// const signUpFailure = function (data) {
+//   $('#message').text('Error signing up').css('color', 'red')
+// }
 
-const signUpSuccess = function (data) {
-  $('#message').text('Successfully Signed Up!').css('color', 'green')
-}
-
-const signUpFailure = function (data) {
-  $('#message').text('Error signing up').css('color', 'red')
-}
-
-const signInSuccess = function (data) {
-  $('#message').text('Successfully Signed In!').css('color', 'green')
-  store.user = data.user // save to what?
-}
-
-const signInFailure = function (data) {
-  $('#message').text('Incorrect Email and/or Password').css('color', 'red')
-}
+// const signInSuccess = function (data) {
+//   $('#message').text('Successfully Signed In!').css('color', 'green')
+//   store.user = data.user // save to what?
+// }
+//
+// const signInFailure = function (data) {
+//   $('#message').text('Incorrect Email and/or Password').css('color', 'red')
+// }
 
 const changePasswordSuccess = function (data) {
   $('#message').text('Successfully changed password!').css('color', 'green')
@@ -104,10 +104,10 @@ const showGamesFailure = function (data) {
   $('#message').text('Error changing password').css('color', 'red')
 }
 module.exports = {
-  signUpSuccess,
-  signUpFailure,
-  signInSuccess,
-  signInFailure,
+  // signUpSuccess,
+  // signUpFailure,
+  // signInSuccess,
+  // signInFailure,
   changePasswordSuccess,
   changePasswordFailure,
   signOutFailure,
