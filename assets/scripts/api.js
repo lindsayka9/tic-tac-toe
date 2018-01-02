@@ -84,7 +84,7 @@ const showGame = function (id) {
 
 module.exports = {
   signUp,
-  signIn,
+  // signIn,
   changePassword,
   signOut,
   showGames,
