@@ -63,6 +63,34 @@ const onGameFinished = function (boolean) {
   }
 }
 
+// even --> X odd --> O, create function to switch between turns
+const evenOdd = function (i) {
+  if (i % 2) {
+    return false
+  } else {
+    return true
+  }
+}
+
+const player = function (turn) {
+  if (evenOdd(turn - 1)) {
+    return 'X'
+  } else {
+    return 'O'
+  }
+}
+
+const playerX = 'X'
+const playerO = 'O'
+
+const whoseTurn = function () {
+  if (evenOdd(turn)) {
+    $('')
+  } else {
+    $('')
+  }
+}
+
 const onShowGames = function (event) {
   event.preventDefault()
   console.log(event)

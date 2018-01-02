@@ -11,14 +11,6 @@ const signUp = function (data) {
   })
 }
 
-const signIn = function (data) {
-  return $.ajax({
-    url: config.apiOrigin + '/sign-in',
-    method: 'POST',
-    data
-  })
-}
-
 const changePassword = function (data) {
   return $.ajax({
     url: config.apiOrigin + '/change-password/' + store.user.id,
