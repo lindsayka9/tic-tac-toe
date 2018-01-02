@@ -32,15 +32,15 @@ const store = require('./store')
 //   })
 // }
 
-const newGame = function () {
-  return $.ajax({
-    url: config.apiOrigin + '/games',
-    method: 'POST',
-    headers: {
-      Authorization: 'Token token=' + store.user.token
-    }
-  })
-}
+// const newGame = function () {
+//   return $.ajax({
+//     url: config.apiOrigin + '/games',
+//     method: 'POST',
+//     headers: {
+//       Authorization: 'Token token=' + store.user.token
+//     }
+//   })
+// }
 
 const showGames = function () {
   return $.ajax({
@@ -52,15 +52,15 @@ const showGames = function () {
   })
 }
 
-const updateGame = function (id) {
-  return $.ajax({
-    url: config.apiOrigin + '/games/' + store.game.id,
-    method: 'PATCH',
-    headers: {
-      Authorization: 'Token token=' + store.user.token
-    }
-  })
-}
+// const updateGame = function (id) {
+//   return $.ajax({
+//     url: config.apiOrigin + '/games/' + store.game.id,
+//     method: 'PATCH',
+//     headers: {
+//       Authorization: 'Token token=' + store.user.token
+//     }
+//   })
+// }
 
 const watchGame = function (id) {
   return $.ajax({
@@ -88,8 +88,8 @@ module.exports = {
   // changePassword,
   // signOut,
   showGames,
-  newGame,
-  updateGame,
+  // newGame,
+  // updateGame,
   watchGame,
   showGame
 }
