@@ -1,31 +1,18 @@
 const getFormFields = require('../../lib/get-form-fields')
 const ui = require('./ui')
 const api = require('./api')
-// const store = require('./store)')
+const store = require('./store)')
 // Using your knowledge of jQuery write a function, onSubmitForm, that console
 // logs the input in the input field when "save changes" is clicked
-let turn = 0
-const playerOne = 'X'
-const playerTwo = 'O'
-const emptyCell = ''
 
-const makeMove = function (event) {
-  event.preventDefault()
-  if ($(this).text() !== emptyCell) {
-    console.log('make a move')
-  } else if (turn % 2 !== 0) {
-    $(this).text(playerOne)
-  } else {
-    $(this).text(playerTwo)
-  }
-  turn++
+// create game board
+let gameboard = ['', '', '', '', '', '', '', '', '']
+let over = false
+let turn = 0
+
+const endofGame = function () {
+  $('').text('The game is over. Click "New Game".')
 }
-//
-// const onBoxClick = function (event) {
-//   const boxData = event.target.dataset
-//   const boxIndex = boxData.cellIndex
-//   ui.updateBox(boxIndex)
-// }
 
 const onSignUp = function (event) {
   const data = getFormFields(event.target)
@@ -61,18 +48,27 @@ const onSignOut = function (event) {
 
 const onNewGame = function (event) {
   event.preventDefault()
-  $('#0').text('')
-  $('#1').text('')
-  $('#2').text('')
-  $('#3').text('')
-  $('#4').text('')
-  $('#5').text('')
-  $('#6').text('')
-  $('#7').text('')
-  $('#8').text('')
-  api.newGame()
-    .then(ui.newGameSuccess)
-    .catch(ui.newGameFailure)
+  gameboard = ['', '', '', '', '', '', '', '', '']
+  turn = 0
+  over = false
+  $('').text('')
+  $('').text('')
+  whoseTurn()
+}
+
+const onGameFinished = function (boolean) {
+  if (boolean) {
+    endofGame()
+    over = true
+  }
+}
+
+const onShowGames = function (event) {
+  event.preventDefault()
+  console.log(event)
+  api.showGames()
+    .then(ui.showGamesSuccess)
+    .catch(ui.showGamesFailure)
 }
 
 const addHandlers = function () {
@@ -80,26 +76,9 @@ const addHandlers = function () {
   $('#sign-in-form').on('submit', onSignIn)
   $('#change-password-form').on('submit', onChangePassword)
   $('#sign-out').on('submit', onSignOut)
-  $('#0').on('click', makeMove)
-  $('#1').on('click', makeMove)
-  $('#2').on('click', makeMove)
-  $('#3').on('click', makeMove)
-  $('#4').on('click', makeMove)
-  $('#5').on('click', makeMove)
-  $('#6').on('click', makeMove)
-  $('#7').on('click', makeMove)
-  $('#8').on('click', makeMove)
-  // $('#0').on('click', onBoxClick)
-  // $('#1').on('click', onBoxClick)
-  // $('#2').on('click', onBoxClick)
-  // $('#3').on('click', onBoxClick)
-  // $('#4').on('click', onBoxClick)
-  // $('#5').on('click', onBoxClick)
-  // $('#6').on('click', onBoxClick)
-  // $('#7').on('click', onBoxClick)
-  // $('#8').on('click', onBoxClick)
   $('#new-game-button').on('click', onNewGame)
-  $('')
+  $('#show-games-button').on('click', onShowGames)
+  // $('#')
 }
 
 module.exports = {
