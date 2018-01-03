@@ -50,6 +50,14 @@ nav {
 
 }
 
+.sign-in-prompt {
+  border: $border;
+  font-size: 60px;
+  height: 100px;
+  text-align: center;
+  width: 50%;
+}
+
 button {
   background-color: $button-color;
   color: $title-color;
