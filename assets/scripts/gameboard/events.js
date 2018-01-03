@@ -41,7 +41,7 @@ const emptyCell = ''
 const makeAMove = function (event) {
   event.preventDefault()
   if ($(this).text() !== emptyCell) {
-    console.log('make a move')
+    console.log('make a valid move')
   } else if (turn % 2 !== 0) {
     $(this).text(playerOne)
   } else {
