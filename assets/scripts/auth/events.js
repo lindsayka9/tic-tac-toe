@@ -3,8 +3,8 @@ const getFormFields = require('../../../lib/get-form-fields')
 const store = require('../store')
 const ui = require('./ui')
 const api = require('./api')
-const gameApi = require('../gameboard/api')
-const gameboard = require('../gameboard/events')
+// const gameApi = require('../gameboard/api')
+// const gameboard = require('../gameboard/events')
 
 const onSignIn = function (event) {
   const data = getFormFields(event.target)
@@ -13,6 +13,7 @@ const onSignIn = function (event) {
   api.signIn(data)
     .then(ui.signInSuccess)
     .catch(ui.signInFailure)
+  $('#sign-in').find('input:text, input:password, select, textarea').val('')
 }
 
 const onSignUp = function (event) {
@@ -22,6 +23,7 @@ const onSignUp = function (event) {
   api.signUp(data)
     .then(ui.signUpSuccess)
     .catch(ui.signUpFailure)
+  $('#sign-up').find('input:text, input:password, input:password, select, textarea').val('')
 }
 
 const onChangePassword = function (event) {
@@ -30,6 +32,7 @@ const onChangePassword = function (event) {
   api.changePassword(data)
     .then(ui.changePasswordSuccess)
     .catch(ui.changePasswordFailure)
+  $('#change-password').find('input:password, input:password, select, textarea').val('')
 }
 
 const onSignOut = function (event) {
@@ -42,23 +45,23 @@ const onSignOut = function (event) {
 }
 
 // starts a new game
-const onStartGame = function () {
-  gameApi.newGame()
-    .then(ui.newGameSuccess)
-    .catch(ui.newGameFailure)
-}
-
-const onQuit = function () {
-  gameboard.resetGame()
-}
+// const onStartGame = function () {
+//   gameApi.newGame()
+//     .then(ui.newGameSuccess)
+//     .catch(ui.newGameFailure)
+// }
+//
+// const onQuit = function () {
+//   gameboard.resetGame()
+// }
 
 const addHandlers = function () {
   $('#sign-in').on('submit', onSignIn)
   $('#sign-up').on('submit', onSignUp)
   $('#change-password').on('submit', onChangePassword)
   $('#sign-out').on('submit', onSignOut)
-  $('#quit-game-button').on('submit', onQuit)
-  $('#new-game-button').on('submit', onStartGame)
+  // $('#quit-game-button').on('submit', onQuit)
+  // $('#new-game-button').on('submit', onStartGame)
 }
 
 module.exports = {
