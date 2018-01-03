@@ -23,7 +23,40 @@ const updateGame = function (id) {
   })
 }
 
+const watchGame = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/games/' + store.game.id + 'watch',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const showGame = function (id) {
+  return $.ajax({
+    url: config.apiOrigin + '/games' + store.game.id,
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const showGames = function () {
+  return $.ajax({
+    url: config.apiOrigin + '/games',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   newGame,
-  updateGame
+  updateGame,
+  watchGame,
+  showGame,
+  showGames
 }

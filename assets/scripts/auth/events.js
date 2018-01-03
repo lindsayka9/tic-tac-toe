@@ -1,11 +1,27 @@
 'use strict'
-
 const getFormFields = require('../../../lib/get-form-fields')
 const store = require('../store')
-const api = require('./api')
 const ui = require('./ui')
+const api = require('./api')
 const gameApi = require('../gameboard/api')
 const gameboard = require('../gameboard/events')
+
+const onSignIn = function (event) {
+  const data = getFormFields(event.target)
+  event.preventDefault()
+  api.signIn(data)
+    .then(ui.signInSuccess)
+    .catch(ui.signInFailure)
+}
+
+const onSignUp = function (event) {
+  event.preventDefault()
+  const data = getFormFields(event.target)
+  console.log(data)
+  api.signUp(data)
+    .then(ui.signUpSuccess)
+    .catch(ui.signUpFailure)
+}
 
 const onChangePassword = function (event) {
   const data = getFormFields(event.target)
@@ -36,6 +52,8 @@ const onQuit = function () {
 }
 
 const addHandlers = function () {
+  $('#sign-in-form').on('submit', onSignIn)
+  $('#sign-up-form').on('submit', onSignUp)
   $('#change-password-form').on('submit', onChangePassword)
   $('#sign-out').on('submit', onSignOut)
   $('#quit-game-button').on('submit', onQuit)
