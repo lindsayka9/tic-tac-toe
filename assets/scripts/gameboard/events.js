@@ -4,6 +4,7 @@ const store = require('../store')
 const ui = require('./ui')
 const api = require('./api')
 
+// function to make move
 const makeMove = function (move, index) {
   const updateArray = {
     game: {
@@ -14,12 +15,14 @@ const makeMove = function (move, index) {
       over: false
     }
   }
+  // add move to api array of game
   const updateCell = JSON.stringify(updateArray)
   api.updateGame(updateCell)
     .then(ui.updateGameSuccess)
     .catch(ui.updateGameFailure)
 }
 
+//
 const getData = function (box) {
   return $(box).data('cell-index')
 }
@@ -60,8 +63,6 @@ const resetGame = function () {
   $('#7').html('')
   $('#8').html('')
   $('#message').text('')
-
-
 }
 
 const addHandlers = function () {
@@ -75,7 +76,6 @@ const addHandlers = function () {
   $('#7').on('click', boxClick)
   $('#8').on('click', boxClick)
   $('#reset-game-button').on('click', resetGame)
-
 }
 
 module.exports = {

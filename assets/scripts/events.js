@@ -12,13 +12,7 @@ const onShowGames = function (event) {
 }
 
 const addHandlers = function () {
-  // $('#sign-up-form').on('submit', onSignUp)
-  // $('#sign-in-form').on('submit', onSignIn)
-  // $('#change-password-form').on('submit', onChangePassword)
-  // $('#sign-out').on('submit', onSignOut)
-  // $('#new-game-button').on('click', onNewGame)
   $('#show-games-button').on('click', onShowGames)
-  // $('#')
 }
 
 module.exports = {
