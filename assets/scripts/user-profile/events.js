@@ -4,7 +4,8 @@ const getFormFields = require('../../../lib/get-form-fields')
 const store = require('../store')
 const api = require('./api')
 const ui = require('./ui')
-const gameApi = require('../board/api')
+const gameApi = require('../gameboard/api')
+const gameboard = require('../gameboard/events')
 
 const onChangePassword = function (event) {
   const data = getFormFields(event.target)
@@ -17,44 +18,28 @@ const onChangePassword = function (event) {
 const onSignOut = function (event) {
   event.preventDefault()
   const data = store
+  console.log(data)
   api.signOut()
     .then(ui.signOutSuccess)
     .catch(ui.signOutFailure)
 }
 
 // starts a new game
-const startGame = function () {
+const onStartGame = function () {
   gameApi.newGame()
     .then(ui.newGameSuccess)
     .catch(ui.newGameFailure)
 }
 
-const quit = function () {
-  const resetGame = function () {
-    store.game = null
-    store.turn = null
-    store.currentPlayer = null
-    store.currentIndex = null
-    // show user profile
-    $('#profile').show()
-    //hide button
-    $('#reset-game').hide()
-    // clear all cells
-    $('#0').html('')
-    $('#1').html('')
-    $('#2').html('')
-    $('#3').html('')
-    $('#4').html('')
-    $('#5').html('')
-    $('#6').html('')
-    $('#7').html('')
-    $('#8').html('')
-    $('#message').text('')
-  }
+const onQuit = function () {
+  gameboard.events.resetGame()
+}
 
 const addHandlers = function () {
   $('#change-password-form').on('submit', onChangePassword)
   $('#sign-out').on('submit', onSignOut)
+  $('#quit-game-button').on('submit', onQuit)
+  $('#new-game-button').on('submit', onStartGame)
 }
 
 module.exports = {
