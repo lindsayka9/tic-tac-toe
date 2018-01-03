@@ -22,16 +22,16 @@ const updateGame = function (id) {
     }
   })
 }
-
-const watchGame = function (id) {
-  return $.ajax({
-    url: config.apiOrigin + '/games/' + store.game.id + 'watch',
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token=' + store.user.token
-    }
-  })
-}
+//
+// const watchGame = function (id) {
+//   return $.ajax({
+//     url: config.apiOrigin + '/games/' + store.game.id + 'watch',
+//     method: 'GET',
+//     headers: {
+//       Authorization: 'Token token=' + store.user.token
+//     }
+//   })
+// }
 
 const showGame = function (id) {
   return $.ajax({
@@ -56,7 +56,7 @@ const showGames = function () {
 module.exports = {
   newGame,
   updateGame,
-  watchGame,
+  // watchGame,
   showGame,
   showGames
 }
