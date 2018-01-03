@@ -4,6 +4,12 @@ const store = require('../store')
 const ui = require('./ui')
 const api = require('./api')
 
+const onStartGame = function () {
+  api.newGame()
+    .then(ui.newGameSuccess)
+    .catch(ui.newGameFailure)
+}
+
 // function to make move
 const makeMove = function (move, index) {
   const updateArray = {
