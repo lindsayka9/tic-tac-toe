@@ -42,13 +42,13 @@
           <p id="sign-in-message"></p>
         </div>
         <div class="column right auth-box signed-in-box">
-          <form id="change-password">
+          <form id="change-password" class="hide">
             <input type="password" name="passwords[old]" placeholder="Enter Old Password">
             <input type="password" name="passwords[new]" placeholder="Enter New Password">
             <input type="submit" name="submit" value="Change Password">
           </form>
           <p id="change-password-message"></p>
-          <form id="sign-out">
+          <form id="sign-out" class="hide">
             <input type="submit" name="submit" value="Sign Out">
           </form>
           <p id="sign-out-message"></p>
@@ -61,7 +61,7 @@
         <h3><span class="results-message" id="results">Winner</span></h3>
       </div>
       <div class="column right gameboard">
-        <div class="container-game" id="game">
+        <div class="hide container-game" id="game">
           <div class="row">
             <div class="box col-xs-4 col-lg-4" id="0" data-cell-index="0"></div>
             <div class="box col-xs-4 col-lg-4" id="1" data-cell-index="1"></div>
@@ -89,10 +89,10 @@
   </div>
 
 
-  <button type="button" name="new-game" value="new-game" id="new-game-button">New Game</button>
-  <button type="button" name="show-games" value="show-games" id="show-games-button">Show All Games</button>
-  <button type="button" name="reset-game" value="reset-game" id="reset-game-button">Reset Game</button>
-  <button type="button" name="end-game" value="quit-game" id="quit-game-button">Quit Game</button>
+  <button type="button" name="new-game" value="new-game" id="new-game-button" class="hide">New Game</button>
+  <button type="button" name="show-games" value="show-games" id="show-games-button" class="hide">Show All Games</button>
+  <button type="button" name="reset-game" value="reset-game" id="reset-game-button" class="hide">Reset Game</button>
+  <button type="button" name="end-game" value="quit-game" id="quit-game-button" class="hide">Quit Game</button>
   <p id="content"></p>
   <!-- <button type="button" name="new-game" value="new-game" id="new-game-button">Watch Game</button> -->
   <!-- <button type="button" name="show-game" value="show-game" id="show-game-button">Show Game</button> -->

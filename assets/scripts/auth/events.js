@@ -8,6 +8,7 @@ const gameboard = require('../gameboard/events')
 
 const onSignIn = function (event) {
   const data = getFormFields(event.target)
+  console.log(data)
   event.preventDefault()
   api.signIn(data)
     .then(ui.signInSuccess)
@@ -48,13 +49,13 @@ const onStartGame = function () {
 }
 
 const onQuit = function () {
-  gameboard.events.resetGame()
+  gameboard.resetGame()
 }
 
 const addHandlers = function () {
-  $('#sign-in-form').on('submit', onSignIn)
-  $('#sign-up-form').on('submit', onSignUp)
-  $('#change-password-form').on('submit', onChangePassword)
+  $('#sign-in').on('submit', onSignIn)
+  $('#sign-up').on('submit', onSignUp)
+  $('#change-password').on('submit', onChangePassword)
   $('#sign-out').on('submit', onSignOut)
   $('#quit-game-button').on('submit', onQuit)
   $('#new-game-button').on('submit', onStartGame)
