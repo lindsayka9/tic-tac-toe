@@ -43,25 +43,76 @@ const onSignOut = function (event) {
     .catch(ui.signOutFailure)
 }
 
-const onStartNewGame = function (event) {
-  event.preventDefault()
-  gameApi.newGame()
-    .then(ui.newGameSuccess)
-    .catch(ui.newGameFailure)
-}
-
 let board = ['', '', '', '', '', '', '', '', '']
 let player = 'X'
 let over = false
 let gameStart = false
+let gameBegin = false
 let gameOver = false
 const emptyCell = ''
+
+const onStartNewGame = function (event) {
+  event.preventDefault()
+  if (gameBegin === false) {
+    return
+  }
+  let game = 0
+  gameStart = true
+  $('#message').text('X - Make the first move, don\'t be shy!')
+  over = false
+  game += 1
+  if (game >= 1) {
+    board = ['', '', '', '', '', '', '', '', '']
+    $('#0').text('')
+    $('#1').text('')
+    $('#2').text('')
+    $('#3').text('')
+    $('#4').text('')
+    $('#5').text('')
+    $('#6').text('')
+    $('#7').text('')
+    $('#8').text('')
+    gameStart = true
+    gameOver = false
+    player = 'X'
+  }
+  api.newGame()
+    .then(ui.newGameSuccess)
+    .catch(ui.newGameFailure)
+}
 
 const fullGameBoard = function (board) {
   for (let i = 0; i <= board.length; i++) {
     if (board[i] === '') {
       return false
     }
+  }
+}
+
+const whoWon = function () {
+  // vertical
+  if ((board[0] !== '') && (board[0] === board[3]) && (board[0] === board[6])) {
+    return true
+  } else if ((board[1] !== '') && (board[1] === board[4]) && (board[1] === board[7])) {
+    return true
+  } else if ((board[2] !== '') && (board[2] === board[5]) && (board[2] === board[8])) {
+    return true
+  }
+  // horizontal
+  if ((board[0] !== '') && (board[0] === board[1]) && (board[0] === board[2])) {
+    return true
+  } else if ((board[3] !== '') && (board[3] === board[4]) && (board[3] === board[5])) {
+    return true
+  } else if ((board[6] !== '') && (board[6] === board[7]) && (board[6] === board[8])) {
+    return true
+  }
+  // diagonal
+  if ((board[0] !== '') && (board[0] === board[4]) && (board[0] === board[6])) {
+    return true
+  } else if ((board[2] !== '') && (board[2] === board[4]) && (board[2] === board[8])) {
+    return true
+  } else {
+    return false
   }
 }
 
@@ -76,7 +127,32 @@ const onCellClick = function (event) {
     return
   }
   if ($(cellId).text() === emptyCell) {
-
+    if (player === 'X') {
+      $(cellId).text('X')
+      board[this.id] = 'X'
+      player = 'O'
+      if (fullGameBoard(board) !== true) {
+        $('#message').text('O\'s turn!')
+        onUpdateGame(cellIdUpdate)
+      } else if (whoWon() === false) {
+        $('#message').text('It\'s a TIE!')
+        over = true
+        onUpdateGame(cellIdUpdate)
+      }
+    } else if (fullGameBoard(board) === false) {
+      $('#message').text('That box is occupied. Please make a valid move.')
+    }
+    if (whoWon() === true) {
+      if (player === 'X') {
+        $('#message').text('O Wins!')
+        onUpdateGame(cellIdUpdate)
+      } else {
+        $('#message').text('X Wins!')
+        onUpdateGame(cellIdUpdate)
+      }
+      gameOver = true
+      onUpdateGame(cellIdUpdate)
+    }
   }
 }
 
@@ -105,7 +181,7 @@ const onUpdateGame = function (event) {
   const data = getFormFields(event.target)
   event.preventDefault()
   console.log('HI?')
-  gameApi.updateGame(data)
+  api.updateGame(data)
     .then(ui.updateGameSuccess)
     .catch(ui.updateGameFailure)
   $('#update-game-button').find('input:text, input:password, select, textarea').val('')
@@ -114,7 +190,7 @@ const onUpdateGame = function (event) {
 const onShowGameOver = function (event) {
   const data = getFormFields(event.target)
   event.preventDefault()
-  gameApi.showGameOver(data)
+  api.showGameOver(data)
     .then(ui.showGameOverSuccess)
     .catch(ui.showGameOverFailure)
 }
