@@ -15,11 +15,11 @@
 
 <body class="container-fluid">
   <nav>
-    <button type="button" class="btn btn-primary hide" data-toggle="modal" data-target="#sign-up" id="signUpButton">Sign Up</button>
-    <button type="button" class="btn btn-primary hide" data-toggle="modal" data-target="#sign-in" id="signInButton">Sign In</button>
-    <button type="button" class="btn btn-primary hide" data-toggle="modal" data-target="#change-password" id="passwordButton">Change Password</button>
-    <form id="sign-out" class="hide">
-      <button type="button" name="btn btn-primary hide" id="signOutButton">Sign Out</button>
+    <button type="button" class="btn btn-primary hidden" data-toggle="modal" data-target="#sign-up" id="signUpButton">Sign Up</button>
+    <button type="button" class="btn btn-primary hidden" data-toggle="modal" data-target="#sign-in" id="signInButton">Sign In</button>
+    <button type="button" class="btn btn-primary hidden" data-toggle="modal" data-target="#change-password" id="passwordButton">Change Password</button>
+    <form id="sign-out-trigger" class="hide">
+      <button type="button" name="btn btn-primary hidden" id="signOutButton">Sign Out</button>
     </form>
   </nav>
 
@@ -63,13 +63,7 @@
     </div>
   </div>
 <!-- New Game button -->
-  <form class="hide new-game" id="new-game">
-    <fieldset>
-      <legend>New Game</legend>
-      <div id="new-content"></div>
-      <input type="submit" name="new-game" value="New Game">
-    </fieldset>
-  </form>
+  <button type="button" class="btn btn-primary hidden" id="new-game">New Game</button>
 <!-- Update Game Button (use ID) -->
   <form class="hide update-game" id="update-game">
     <fieldset>
@@ -79,23 +73,14 @@
       <input type="submit" name="submit" value="Update Game">
     </fieldset>
   </form>
-<!-- Show a Game by ID -->
-  <form class="hide show-game" id="show-game">
-    <fieldset>
-      <legend>Show Game</legend>
-      <div id="show-content"></div>
-      <input type="text" name="game[id]" placeholder="Game ID">
-      <input type="submit" name="submit" value="Show Game">
-    </fieldset>
-  </form>
 <!-- Show All Games Button -->
-  <form class="hide show-games" id="show-games">
+  <!-- <form class="hide show-games" id="show-games">
     <fieldset>
       <legend>Show All Games</legend>
       <div id="show-all-content"></div>
       <input type="submit" name="submit" value="Show All Games">
     </fieldset>
-  </form>
+  </form> -->
 <!-- Reset game button -->
   <form class="hide reset-game" id="reset-game">
     <fieldset>
