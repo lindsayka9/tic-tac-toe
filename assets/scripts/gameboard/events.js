@@ -63,15 +63,15 @@ const makeAMove = function (event) {
 //   const htmlO =
 // }
 //
-// const boxClick = function () {
-//   const boxId = '#' + this.id
-//   // if game isn't done, mark board, if it is, tell the player
-//   if (store.game.over !== true) {
-//     moveOnBoard(boxId)
-//   } else {
-//     $('#message').text('Game is over.')
-//   }
-// }
+const boxClick = function () {
+  const boxId = '#' + this.id
+  // if game isn't done, mark board, if it is, tell the player
+  if (store.game.over !== true) {
+    moveOnBoard(boxId)
+  } else {
+    $('#message').text('Game is over.')
+  }
+}
 
 // reset game/store file
 const resetGame = function () {
