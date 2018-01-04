@@ -1,85 +1,16 @@
 'use strict'
 
 const getFormFields = require('../../../lib/get-form-fields')
-const store = require('../store')
 const ui = require('./ui')
 const api = require('./api')
 
-const onSignIn = function (event) {
-  const data = getFormFields(event.target)
-  console.log(data)
-  event.preventDefault()
-  api.signIn(data)
-    .then(ui.signInSuccess)
-    .catch(ui.signInFailure)
-  $('#sign-in').find('input:text, input:password, select, textarea').val('')
-}
-
-const onSignUp = function (event) {
-  event.preventDefault()
-  const data = getFormFields(event.target)
-  console.log(data)
-  api.signUp(data)
-    .then(ui.signUpSuccess)
-    .catch(ui.signUpFailure)
-  $('#sign-up').find('input:text, input:password, input:password, select, textarea').val('')
-}
-
-const onChangePassword = function (event) {
-  const data = getFormFields(event.target)
-  event.preventDefault()
-  api.changePassword(data)
-    .then(ui.changePasswordSuccess)
-    .catch(ui.changePasswordFailure)
-  $('#change-password').find('input:password, input:password, select, textarea').val('')
-}
-
-const onSignOut = function (event) {
-  event.preventDefault()
-  const data = store
-  console.log(data)
-  api.signOut()
-    .then(ui.signOutSuccess)
-    .catch(ui.signOutFailure)
-}
-
 let board = ['', '', '', '', '', '', '', '', '']
 let player = 'X'
-let over = false
 let gameStart = false
-let gameBegin = false
+const gameBegin = false
 let gameOver = false
 const emptyCell = ''
-
-const onStartNewGame = function (event) {
-  event.preventDefault()
-  if (gameBegin === false) {
-    return
-  }
-  let game = 0
-  gameStart = true
-  $('#message').text('X - Make the first move, don\'t be shy!')
-  over = false
-  game += 1
-  if (game >= 1) {
-    board = ['', '', '', '', '', '', '', '', '']
-    $('#0').text('')
-    $('#1').text('')
-    $('#2').text('')
-    $('#3').text('')
-    $('#4').text('')
-    $('#5').text('')
-    $('#6').text('')
-    $('#7').text('')
-    $('#8').text('')
-    gameStart = true
-    gameOver = false
-    player = 'X'
-  }
-  api.newGame()
-    .then(ui.newGameSuccess)
-    .catch(ui.newGameFailure)
-}
+let over = false
 
 const fullGameBoard = function (board) {
   for (let i = 0; i <= board.length; i++) {
@@ -138,6 +69,12 @@ const onCellClick = function (event) {
         $('#message').text('It\'s a TIE!')
         over = true
         onUpdateGame(cellIdUpdate)
+      } else {
+        player = 'X'
+        $(cellId).text('O')
+        board[this.id] = 'O'
+        $('#message').text('X\'s turn!')
+        onUpdateGame(cellIdUpdate)
       }
     } else if (fullGameBoard(board) === false) {
       $('#message').text('That box is occupied. Please make a valid move.')
@@ -156,25 +93,34 @@ const onCellClick = function (event) {
   }
 }
 
-// reset game/store file
-const resetGame = function () {
-  store.game = null
-  store.turn = null
-  store.currentPlayer = null
-  store.currentIndex = null
-  // hide button
-  $('#reset-game-button').hide()
-  // clear all cells
-  $('#0').html('')
-  $('#1').html('')
-  $('#2').html('')
-  $('#3').html('')
-  $('#4').html('')
-  $('#5').html('')
-  $('#6').html('')
-  $('#7').html('')
-  $('#8').html('')
-  $('#message').text('')
+const onStartNewGame = function (event) {
+  event.preventDefault()
+  if (gameBegin === false) {
+    return
+  }
+  let game = 0
+  gameStart = true
+  $('#message').text('X - Make the first move, don\'t be shy!')
+  over = false
+  game += 1
+  if (game >= 1) {
+    board = ['', '', '', '', '', '', '', '', '']
+    $('#0').text('')
+    $('#1').text('')
+    $('#2').text('')
+    $('#3').text('')
+    $('#4').text('')
+    $('#5').text('')
+    $('#6').text('')
+    $('#7').text('')
+    $('#8').text('')
+    gameStart = true
+    gameOver = false
+    player = 'X'
+  }
+  api.newGame()
+    .then(ui.newGameSuccess)
+    .catch(ui.newGameFailure)
 }
 
 const onUpdateGame = function (event) {
@@ -195,15 +141,61 @@ const onShowGameOver = function (event) {
     .catch(ui.showGameOverFailure)
 }
 
+const onSignIn = function (event) {
+  const data = getFormFields(event.target)
+  event.preventDefault()
+  this.reset()
+  api.signIn(data)
+    .then(ui.signInSuccess)
+    .catch(ui.signInFailure)
+}
+
+const onSignUp = function (event) {
+  const data = getFormFields(event.target)
+  event.preventDefault()
+  this.reset()
+  api.signUp(data)
+    .then(ui.signUpSuccess)
+    .catch(ui.signUpFailure)
+}
+
+const onChangePassword = function (event) {
+  const data = getFormFields(event.target)
+  event.preventDefault()
+  this.reset()
+  api.changePassword(data)
+    .then(ui.changePasswordSuccess)
+    .catch(ui.changePasswordFailure)
+}
+
+const onSignOut = function (event) {
+  event.preventDefault()
+  board = ['', '', '', '', '', '', '', '', '']
+  $('#0').text('')
+  $('#1').text('')
+  $('#2').text('')
+  $('#3').text('')
+  $('#4').text('')
+  $('#5').text('')
+  $('#6').text('')
+  $('#7').text('')
+  $('#8').text('')
+  over = false
+  gameStart = false
+  $('#message').text('')
+  api.signOut()
+    .then(ui.signOutSuccess)
+    .catch(ui.signOutFailure)
+}
+
 const addHandlers = function () {
-  $('#reset-game-button').on('submit', resetGame)
-  $('#new-game-button').on('submit', onStartNewGame)
-  $('#update-game-button').on('submit', onUpdateGame)
+  $('#new-game-button').on('click', onStartNewGame)
   $('#show-game-over').on('submit', onShowGameOver)
   $('#sign-in').on('submit', onSignIn)
   $('#sign-up').on('submit', onSignUp)
   $('#change-password').on('submit', onChangePassword)
-  $('#sign-out').on('submit', onSignOut)
+  $('#sign-out').on('click', onSignOut)
+  $('.box').on('click', onCellClick)
 }
 
 module.exports = {
