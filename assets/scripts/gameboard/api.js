@@ -24,33 +24,24 @@ const updateGame = function (data) {
     data
   })
 }
-
-const showGame = function (id) {
-  return $.ajax({
-    url: config.apiOrigin + '/games' + store.game.id,
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token=' + store.user.token
-    }
-  })
-}
-
-const showGames = function () {
-  return $.ajax({
-    url: config.apiOrigin + '/games',
-    method: 'GET',
-    headers: {
-      Authorization: 'Token token=' + store.user.token
-    }
-  })
-}
+//
+// const showGames = function () {
+//   return $.ajax({
+//     url: config.apiOrigin + '/games',
+//     method: 'GET',
+//     headers: {
+//       Authorization: 'Token token=' + store.user.token
+//     }
+//   })
+// }
 
 const showGameOver = function (data) {
   return $.ajax({
     url: config.apiOrigin + '/games?over=true',
     method: 'GET',
     headers: {
-      Authorization: 'Token token=' + store.user.token
+      Authorization: 'Token token=' + store.user.token,
+      'Content-Type': 'application/json'
     },
     data
   })
@@ -59,7 +50,7 @@ const showGameOver = function (data) {
 module.exports = {
   newGame,
   updateGame,
-  showGame,
-  showGames,
+  // showGame,
+  // showGames,
   showGameOver
 }
