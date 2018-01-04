@@ -6,10 +6,17 @@ const ui = require('./ui')
 const gameApi = require('./api')
 
 const onStartNewGame = function (event) {
+  event.preventDefault()
   gameApi.newGame()
     .then(ui.newGameSuccess)
     .catch(ui.newGameFailure)
 }
+
+// let board = ['', '', '', '', '', '', '', '', '']
+// let over = false
+// let gameStart = false
+// let playerToken = 'X'
+// let gameOver = false
 
 // function to make move
 // const makeMove = function (move, index) {
@@ -33,7 +40,7 @@ const onStartNewGame = function (event) {
 // const getData = function (box) {
 //   return $(box).data('cell-index')
 // }
-
+//
 let turn = 0
 const playerOne = 'X'
 const playerTwo = 'O'
@@ -72,8 +79,6 @@ const resetGame = function () {
   store.turn = null
   store.currentPlayer = null
   store.currentIndex = null
-  // show user profile
-  $('#profile').show()
   // hide button
   $('#reset-game-button').hide()
   // clear all cells
@@ -103,6 +108,7 @@ const onShowGame = function (event) {
   gameApi.showGame(data)
     .then(ui.showGameSuccess)
     .catch(ui.showGameFailure)
+  $('#show-game').find('input:text, input:password, select, textarea').val('')
 }
 
 const onUpdateGame = function (event) {
@@ -113,6 +119,14 @@ const onUpdateGame = function (event) {
     .then(ui.updateGameSuccess)
     .catch(ui.updateGameFailure)
   $('#update-game-button').find('input:text, input:password, select, textarea').val('')
+}
+
+const onShowGameOver = function (event) {
+  const data = getFormFields(event.target)
+  event.preventDefault()
+  gameApi.showGameOver(data)
+    .then(ui.showGameOverSuccess)
+    .catch(ui.showGameOverFailure)
 }
 
 const addHandlers = function () {
@@ -130,6 +144,7 @@ const addHandlers = function () {
   $('#show-games-button').on('submit', onShowGames)
   $('#show-game-button').on('submit', onShowGame)
   $('#update-game-button').on('submit', onUpdateGame)
+  $('#show-game-over').on('submit', onShowGameOver)
 }
 
 module.exports = {

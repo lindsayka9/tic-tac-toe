@@ -1,11 +1,19 @@
 'use strict'
 
 const store = require('../store')
+const game = require('./game')
 
 const newGameSuccess = function (data) {
   $('#message').text('Successfully saved game').css('color', 'green')
-  store.game = data.game
-  console.log(data)
+  store['game'] = data.game
+  console.log(store)
+  const gameHtml = (
+    `<ul>
+    <h3>Game:</h3>
+      <li>ID: ${data.game.id}</li>
+    </ul>`
+  )
+  $('#new-content').append(gameHtml)
 }
 
 const newGameFailure = function (data) {
@@ -13,13 +21,13 @@ const newGameFailure = function (data) {
 }
 
 const showGameSuccess = function (data) {
-  const gameHtml = (
-    `<ul>
-    <h3>Game:</h3>
-      <li>ID: ${data.game.id}</li>
-    </ul>`
-  )
-  $('#content').append(gameHtml)
+  // const gameHtml = (
+  //   `<ul>
+  //   <h3>Game:</h3>
+  //     <li>ID: ${data.game.id}</li>
+  //   </ul>`
+  // )
+  // $('#content').append(gameHtml)
   $('#message').text('Successfully changed password!').css('color', 'green')
 }
 
