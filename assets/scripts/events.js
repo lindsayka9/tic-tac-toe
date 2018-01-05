@@ -175,6 +175,7 @@ const onSignIn = function (event) {
   api.signIn(data)
     .then(ui.signInSuccess)
     .catch(ui.signInFailure)
+  $('#sign-in').find('input:text, input:password, select, textarea').val('')
 }
 
 const onSignUp = function (event) {
@@ -183,6 +184,7 @@ const onSignUp = function (event) {
   api.signUp(data)
     .then(ui.signUpSuccess)
     .catch(ui.signUpFailure)
+  $('#sign-up').find('input:text, input:password, select, textarea').val('')
 }
 
 const onChangePassword = function (event) {
@@ -191,6 +193,7 @@ const onChangePassword = function (event) {
   api.changePassword(data)
     .then(ui.changePasswordSuccess)
     .catch(ui.changePasswordFailure)
+  $('#password-change').find('input:text, input:password, select, textarea').val('')
 }
 
 const onSignOut = function (event) {
