@@ -15,97 +15,52 @@
 
 <body class="container-fluid">
   <nav>
-    <button type="button" class="btn btn-primary hidden" data-toggle="modal" data-target="#sign-up" id="signUpButton">Sign Up</button>
-    <button type="button" class="btn btn-primary hidden" data-toggle="modal" data-target="#sign-in" id="signInButton">Sign In</button>
-    <button type="button" class="btn btn-primary hidden" data-toggle="modal" data-target="#change-password" id="passwordButton">Change Password</button>
-    <form id="sign-out-trigger" class="hide">
-      <button type="button" name="btn btn-primary hidden" id="signOutButton">Sign Out</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sign-up" id="signUpButton">Sign Up</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sign-in" id="signInButton">Sign In</button>
+    <button type="button" class="btn btn-primary hide" data-toggle="modal" data-target="#change-password" id="passwordButton">Change Password</button>
+    <form class="hide" id="sign-out-trigger">
+      <button type="button" name="btn btn-primary" id="signOutButton">Sign Out</button>
     </form>
   </nav>
-
-  <p id="message"></p>
 
   <h1>Tic-Tac-Toe</h1>
 
   <p>Want to Play?</p>
 
-  <div class="column right">
-    <div class="column right results-box">
-      <h3><span class="results-message" id="results">Winner</span></h3>
-    </div>
-    <div class="column right gameboard">
+  <p id="message"></p>
+
+  <!-- New Game button -->
+    <button type="button" class="btn btn-primary hide" id="new-game">New Game</button>
+  <!-- # of Finished games -->
+    <button type="button" class="btn btn-primary hide" id="games-finished">Finished Games</button>
+
+
+  <div>
+    <div class="gameboard">
       <div class="hide container-game" id="game">
         <div class="row">
-          <div class="box col-xs-4 col-lg-4" id="0" data-cell-index="0"></div>
-          <div class="box col-xs-4 col-lg-4" id="1" data-cell-index="1"></div>
-          <div class="box col-xs-4 col-lg-4" id="2" data-cell-index="2"></div>
+          <div class="box col-xs-4 col-lg-4 squareCell" id="0" data-cell-index="0"></div>
+          <div class="box col-xs-4 col-lg-4 squareCell" id="1" data-cell-index="1"></div>
+          <div class="box col-xs-4 col-lg-4 squareCell" id="2" data-cell-index="2"></div>
         </div>
 
         <div class="row">
-          <div class="box col-xs-4 col-lg-4" id="3" data-cell-index="3"></div>
-          <div class="box col-xs-4 col-lg-4" id="4" data-cell-index="4"></div>
-          <div class="box col-xs-4 col-lg-4" id="5" data-cell-index="5"></div>
+          <div class="box col-xs-4 col-lg-4 squareCell" id="3" data-cell-index="3"></div>
+          <div class="box col-xs-4 col-lg-4 squareCell" id="4" data-cell-index="4"></div>
+          <div class="box col-xs-4 col-lg-4 squareCell" id="5" data-cell-index="5"></div>
         </div>
 
         <div class="row">
-          <div class="box col-xs-4 col-lg-4" id="6" data-cell-index="6"></div>
-          <div class="box col-xs-4 col-lg-4" id="7" data-cell-index="7"></div>
-          <div class="box col-xs-4 col-lg-4" id="8" data-cell-index="8"></div>
+          <div class="box col-xs-4 col-lg-4 squareCell" id="6" data-cell-index="6"></div>
+          <div class="box col-xs-4 col-lg-4 squareCell" id="7" data-cell-index="7"></div>
+          <div class="box col-xs-4 col-lg-4 squareCell" id="8" data-cell-index="8"></div>
         </div>
       </div>
       <div class="sign-in-prompt" id="sign-in-image">
         <p>Sign in to play</p>
       </div>
     </div>
-    <div class="gameboard turn-box">
-      <span id="current-player">It's __'s Turn</span>
-      <!-- current turn text -->
-    </div>
   </div>
-<!-- New Game button -->
-  <button type="button" class="btn btn-primary hidden" id="new-game">New Game</button>
-<!-- Update Game Button (use ID) -->
-  <form class="hide update-game" id="update-game">
-    <fieldset>
-      <legend>Update Game</legend>
-      <div id="update-content"></div>
-      <input type="text" name="game[id]" placeholder="Game ID">
-      <input type="submit" name="submit" value="Update Game">
-    </fieldset>
-  </form>
-<!-- Show All Games Button -->
-  <!-- <form class="hide show-games" id="show-games">
-    <fieldset>
-      <legend>Show All Games</legend>
-      <div id="show-all-content"></div>
-      <input type="submit" name="submit" value="Show All Games">
-    </fieldset>
-  </form> -->
-<!-- Reset game button -->
-  <form class="hide reset-game" id="reset-game">
-    <fieldset>
-      <legend>Reset Game</legend>
-      <div id="reset-content"></div>
-      <input type="submit" name="submit" value="Reset Game">
-    </fieldset>
-  </form>
-<!-- Quit game button -->
-  <form class="hide quit-game" id="quit-game">
-    <fieldset>
-      <legend>Quit Game</legend>
-      <div id="quit-content"></div>
-      <input type="submit" name="submit" value="Quit Game">
-    </fieldset>
-  </form>
-<!-- # of Finished games -->
-  <form class="hide show-game-over" id="show-game-over">
-    <fieldset>
-      <legend>Number of Finished Games</legend>
-      <div id="game-over-content"></div>
-      <input type="submit" name="submit" value="Finished Games">
-    </fieldset>
-  </form>
-
 <!-- modals start here -->
 <!-- sign up modal -->
       <div class="modal fade" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -118,19 +73,20 @@
               </button>
             </div>
             <div class="modal-body">
-              <form class ="sign-up-modal" id="sign-up-form">
-                <fieldset>
-                  <input class="sign-up-input" type="text" name="credentials[email]" placeholder="Enter Email">
-                  <input class="sign-up-input" type="password" name="credentials[password]" placeholder="Enter Password">
-                  <input class="sign-up-input" type="password" name="credentials[password-confirmation]" placeholder="Confirm Password">
-                  <input class="button" type="submit" name="submit" value="Sign-Up!">
-                </fieldset>
-                <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
-              </form>
+              <div class ="sign-up-modal">
+                <form id="sign-up-form">
+                  <fieldset>
+                    <input class="sign-up-input" type="text" name="credentials[email]" placeholder="Enter Email">
+                    <input class="sign-up-input" type="password" name="credentials[password]" placeholder="Enter Password">
+                    <input class="sign-up-input" type="password" name="credentials[password-confirmation]" placeholder="Confirm Password">
+                    <input class="button" type="submit" name="submit" value="Sign-Up!">
+                  </fieldset>
+                </form>
+              </div>
             </div>
             <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button> -->
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
             </div>
           </div>
         </div>
@@ -156,33 +112,8 @@
               </form>
             </div>
             <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button> -->
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Sign out modal -->
-      <div class="modal fade" id="sign-out" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h3 class="modal-title" id="exampleModalLabel">Sign Out!</h3>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form class ="sign-out-modal" id="sign-out-button">
-                <fieldset>
-                  <input class="button" type="submit" name="submit" value="Sign-out!">
-                </fieldset>
-                <!-- <button type="submit" class="btn btn-primary">Sign In</button> -->
-              </form>
-            </div>
-            <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button> -->
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
             </div>
           </div>
         </div>
@@ -208,17 +139,16 @@
               </form>
             </div>
             <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button> -->
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
             </div>
           </div>
         </div>
       </div>
-  <p id="content"></p>
-
-  <footer>
-    <p> Made by Kathryn Lindsay </p>
-  </footer>
-</body>
+      <br>
+    <footer>
+      <p> Made by Kathryn Lindsay </p>
+    </footer>
+  </body>
 
 </html>
