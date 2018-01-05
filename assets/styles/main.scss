@@ -1,9 +1,10 @@
 $header-color: #4569e4;
 $body-color: #8ca6ff;
 $nav-footer-color: #acb6d9;
-$border: 2px solid #000;
+$border: 2px solid #000080;
 $title-color: #fff;
 $button-color: #4569e4;
+$button: #3498db;
 
 header {
   background-color: $header-color;
@@ -13,6 +14,7 @@ h1 {
   color: $title-color;
   font-family: Arial, serif;
   font-size: 70px;
+  text-align: center;
 }
 
 body {
@@ -20,21 +22,37 @@ body {
   background-color: $body-color;
 }
 
-footer {
-  background-color: $nav-footer-color;
-  border: border;
-}
-
 nav {
   background-color: $nav-footer-color;
   border: $border;
-  float: right;
+  float: left;
   width: 100%;
+
+  button {
+    float: left;
+    padding: 10px 20px;
+  }
+}
+
+p {
+  text-align: center;
 }
 
 .btn {
-  background-color: $button-color;
+  background: $button;
+  border-radius: 10px;
   color: $title-color;
+  font-family: Arial;
+  font-size: 20px;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.container-game {
+  display: inline-block;
+  margin: auto;
+  padding: 5% 20%;
+  width: 100%;
 }
 
 .box {
@@ -44,21 +62,15 @@ nav {
   text-align: center;
 }
 
-.container-game {
-  align-content: center;
-  width: 60%;
-
-}
-
 .sign-in-prompt {
   border: $border;
   font-size: 20px;
   height: 100px;
   text-align: center;
-  width: 50%;
+  width: 100%;
 }
-
-button {
-  background-color: $button-color;
-  color: $title-color;
-}
+//
+// button {
+//   background-color: $button-color;
+//   color: $title-color;
+// }
