@@ -38,9 +38,8 @@ const whoWon = function () {
     return true
   } else if ((board[6] === board[7]) && (board[6] === board[8]) && (board[6] !== '')) {
     return true
-  }
   // diagonal
-  if ((board[0] === board[4]) && (board[0] === board[8]) && (board[0] !== '')) {
+  } else if ((board[0] === board[4]) && (board[0] === board[8]) && (board[0] !== '')) {
     return true
   } else if ((board[2] === board[4]) && (board[2] === board[6]) && (board[2] !== '')) {
     return true
