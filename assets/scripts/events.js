@@ -168,7 +168,7 @@ const onChangePassword = function (event) {
   api.changePassword(data)
     .then(ui.changePasswordSuccess)
     .catch(ui.changePasswordFailure)
-  $('#password-change-button').find('input:password, input:password, select, textarea').val('')
+  $('#change-password').find('input:password, input:password, select, textarea').val('')
 }
 
 const onSignOut = function (event) {

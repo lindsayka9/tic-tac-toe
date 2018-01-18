@@ -36,13 +36,13 @@ const changePasswordSuccess = function (data) {
   $('#password-error').text('')
   $('#change-password').modal('hide')
   $('#message').text('Successfully changed password!').css('color', 'green')
-  $('#password-change').find('input:password, input:password, select, textarea').val('')
+  $('#change-password').find('input:password, input:password, select, textarea').val('')
 }
 
 const changePasswordFailure = function (error) {
   console.error(error)
   $('#password-error').text('Error changing password').css('color', 'red')
-  $('#password-change').find('input:password, input:password, select, textarea').val('')
+  $('#change-password').find('input:password, input:password, select, textarea').val('')
 }
 
 const signOutSuccess = function (data) {
