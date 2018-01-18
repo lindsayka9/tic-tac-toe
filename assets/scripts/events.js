@@ -10,7 +10,6 @@ let board = ['', '', '', '', '', '', '', '', '']
 let playerToken = 'X'
 let gameStart = false
 let gameBegin = false
-let gameOver = false
 const emptyCell = ''
 store.gameOver = false
 
@@ -51,7 +50,7 @@ const fullGameBoard = function (board) {
 const onCellClick = function () {
   const cellId = '#' + this.id
   const cellIdUpdate = this.id
-  if (gameOver === true) {
+  if (store.gameOver === true) {
     return
   }
   if (gameStart === false) {
@@ -84,9 +83,10 @@ const onCellClick = function () {
   if (whoWon() === true) {
     if (playerToken === 'X') {
       $('#message').text('O Wins!')
+      store.gameOver = true
       onUpdateGame(cellIdUpdate)
     } else $('#message').text('X Wins!')
-    gameOver = true
+    store.gameOver = true
     onUpdateGame(cellIdUpdate)
   }
 }
@@ -127,7 +127,7 @@ const onStartNewGame = function (event) {
     $('#6').text('')
     $('#7').text('')
     $('#8').text('')
-    gameOver = false
+    store.gameOver = false
     gameStart = true
     playerToken = 'X'
   }
