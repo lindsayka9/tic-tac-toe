@@ -41,7 +41,7 @@ const signOut = function (data) {
   })
 }
 
-const newGame = function (data) {
+const newGame = function () {
   return $.ajax({
     url: config.apiOrigin + '/games',
     method: 'POST',
@@ -52,13 +52,14 @@ const newGame = function (data) {
 }
 
 const updateGame = function (data) {
+  data = JSON.stringify(data)
   return $.ajax({
-    url: config.apiOrigin + '/games/' + store.gameInfo.game.id,
+    url: config.apiOrigin + '/games/' + store.game.id,
     method: 'PATCH',
     headers: {
-      Authorization: 'Token token=' + store.user.token,
-      'Content-Type': 'application/json'
+      Authorization: 'Token token=' + store.user.token
     },
+    contentType: 'application/json',
     data
   })
 }

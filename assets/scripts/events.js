@@ -3,7 +3,7 @@
 const getFormFields = require('../../lib/get-form-fields')
 const ui = require('./ui')
 const api = require('./api')
-// const store = require('./store')
+const store = require('./store')
 
 let board = ['', '', '', '', '', '', '', '', '']
 
@@ -12,15 +12,7 @@ let gameStart = false
 let gameBegin = false
 let gameOver = false
 const emptyCell = ''
-let over = false
-
-const fullGameBoard = function (board) {
-  for (let i = 0; i <= board.length; i++) {
-    if (board[i] === '') {
-      return false
-    }
-  }
-}
+store.gameOver = false
 
 const whoWon = function () {
   // vertical
@@ -48,9 +40,17 @@ const whoWon = function () {
   }
 }
 
-const onCellClick = function (event) {
+const fullGameBoard = function (board) {
+  for (let i = 0; i <= board.length; i++) {
+    if (board[i] === '') {
+      return false
+    }
+  }
+}
+
+const onCellClick = function () {
   const cellId = '#' + this.id
-  const cellIdUpdate = event.target.id
+  const cellIdUpdate = this.id
   if (gameOver === true) {
     return
   }
@@ -68,7 +68,7 @@ const onCellClick = function (event) {
         onUpdateGame(cellIdUpdate)
       } else if (whoWon() === false) {
         $('#message').text('It\'s a TIE!')
-        over = true
+        store.gameOver = true
         onUpdateGame(cellIdUpdate)
       }
     } else {
@@ -86,10 +86,24 @@ const onCellClick = function (event) {
       $('#message').text('O Wins!')
       onUpdateGame(cellIdUpdate)
     } else $('#message').text('X Wins!')
-    onUpdateGame(cellIdUpdate)
     gameOver = true
     onUpdateGame(cellIdUpdate)
   }
+}
+
+const onUpdateGame = function (event) {
+  const data = {
+    'game': {
+      'cell': {
+        'index': store.index,
+        'value': $(event.target).val()
+      },
+      'over': store.gameOver
+    }
+  }
+  api.updateGame(data)
+    .then(ui.updateGameSuccess)
+    .catch(ui.updateGameFailure)
 }
 
 const onStartNewGame = function (event) {
@@ -100,7 +114,7 @@ const onStartNewGame = function (event) {
   }
   gameStart = true
   $('#message').text('X - Make the first move, don\'t be shy!')
-  over = false
+  store.gameOver = false
   game += 1
   if (game >= 1) {
     board = ['', '', '', '', '', '', '', '', '']
@@ -120,44 +134,6 @@ const onStartNewGame = function (event) {
   api.newGame()
     .then(ui.newGameSuccess)
     .catch(ui.newGameFailure)
-}
-
-const onUpdateGame = function (cellId) {
-  if (emptyCell !== '') {
-    return
-  }
-  if ((whoWon() === true) || (fullGameBoard(board) === true)) {
-    over = true
-  }
-  if (playerToken === 'O') {
-    const changeX = {
-      game: {
-        cell: {
-          index: cellId,
-          value: 'x'
-        },
-        over: over
-      }
-    }
-    const dataObject = JSON.stringify(changeX)
-    api.updateGame(dataObject)
-      .then(ui.updateGameSuccess)
-      .catch(ui.updateGameFailure)
-  } else if (playerToken === 'X') {
-    const changeO = {
-      game: {
-        cell: {
-          index: cellId,
-          value: 'o'
-        },
-        over: over
-      }
-    }
-    const dataObject = JSON.stringify(changeO)
-    api.updateGame(dataObject)
-      .then(ui.updateGameSuccess)
-      .catch(ui.updateGameFailure)
-  }
 }
 
 const onShowGameOver = function (event) {
@@ -207,7 +183,7 @@ const onSignOut = function (event) {
   $('#6').text('')
   $('#7').text('')
   $('#8').text('')
-  over = false
+  store.gameOver = false
   gameStart = false
   $('#message').text('')
   api.signOut()
@@ -217,7 +193,7 @@ const onSignOut = function (event) {
 
 const addHandlers = function () {
   $('.squareCell').on('click', onCellClick)
-  $('.squareCell').on('click', onUpdateGame)
+  // $('.squareCell').on('click', onUpdateGame)
   $('#new-game').on('click', onStartNewGame)
   $('#games-finished').on('click', onShowGameOver)
   $('#sign-in').on('submit', onSignIn)

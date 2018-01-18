@@ -9,38 +9,44 @@ const signInSuccess = function (data) {
   $('#passwordButton').removeClass('hide')
   $('#sign-out-trigger').removeClass('hide')
   $('#new-game').removeClass('hide')
-  $('#games-finished').removeClass('hide')
   $('#game').removeClass('hide')
   $('#sign-in-image').addClass('hide')
+  $('#sign-in').modal('hide')
+  $('#message').text('You have successfully signed in!')
+  $('#sign-in-error').text('')
 }
 
 const signInFailure = function (error) {
   console.error(error)
-  $('#message').text('Incorrect Email and/or Password').css('color', 'red')
+  $('#sign-in-error').text('Incorrect Email and/or Password').css('color', 'red')
 }
 
 const signUpSuccess = function (data) {
+  $('#sign-up-error').text('')
+  $('#sign-up').modal('hide')
   $('#message').text('Successfully Signed Up!').css('color', 'green')
 }
 
 const signUpFailure = function (error) {
   console.error(error)
-  $('#message').text('Error signing up').css('color', 'red')
+  $('#sign-up-error').text('Error signing up').css('color', 'red')
 }
 
 const changePasswordSuccess = function (data) {
+  $('#password-error').text('')
+  $('#change-password').modal('hide')
   $('#message').text('Successfully changed password!').css('color', 'green')
 }
 
 const changePasswordFailure = function (error) {
   console.error(error)
-  $('#message').text('Error changing password').css('color', 'red')
+  $('#password-error').text('Error changing password').css('color', 'red')
 }
 
 const signOutSuccess = function (data) {
   $('#signInButton').show()
   $('#signUpButton').show()
-  $('#passwordButton').hide()
+  $('#passwordButton').addClass('hide')
   $('#sign-out-trigger').addClass('hide')
   $('#new-game').addClass('hide')
   $('#games-finished').addClass('hide')
@@ -48,6 +54,9 @@ const signOutSuccess = function (data) {
   $('sign-in-image').removeClass('hide')
   $('#message').text('Successfully signed out!').css('color', 'green')
   store.user = null
+  $('#sign-in-error').text('')
+  $('#password-error').text('')
+  $('#sign-up-error').text('')
 }
 
 const signOutFailure = function (data) {
@@ -55,7 +64,10 @@ const signOutFailure = function (data) {
 }
 
 const newGameSuccess = function (data) {
-  store.gameInfo = data
+  store.game = data.game
+  store.game.id = data.game.id
+  store.game.over = data.game.over
+  $('#games-finished').removeClass('hide')
 }
 
 const newGameFailure = function (error) {
@@ -63,7 +75,9 @@ const newGameFailure = function (error) {
 }
 
 const updateGameSuccess = function (data) {
-  store.updatedGame = data
+  // store.game = data
+  // console.log(store)
+  // console.log(data)
 }
 
 const updateGameFailure = function (error) {
